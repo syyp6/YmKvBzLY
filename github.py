@@ -402,9 +402,9 @@ class Github(object):
                     continue
                 else:
                     file_ = _
-                    break
+                    return file_
 
-        return file_
+
 
     def upload_file_to_repo_forsha(self, fiel, commit_message):
         url = f"https://api.github.com/repos/{self.username}/{self.target_repo_name}/contents/{fiel.get('path')}"
