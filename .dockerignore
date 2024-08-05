@@ -1,0 +1,7 @@
+/Dockerfile
+/.dockerignore
+/.gitignore
+/.shadow-cljs/
+/node_modules/
+/.git/
+/resources/public/js/compiled
