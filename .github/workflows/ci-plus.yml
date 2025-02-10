@@ -3,10 +3,9 @@ on:
   # push:
   #   branches:
   #     - main
+  workflow_dispatch:    # 允许手动触发
   schedule:
     - cron: '*/60 * * * *'  # 每小时运行一次
-  workflow_dispatch:
-
 jobs:
   run-script:
     runs-on: ubuntu-latest
