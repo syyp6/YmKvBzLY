@@ -90,44 +90,44 @@ class Github(object):
             print("No repository ,need to create repo")
             self.create_repo()
         print(f"当前需要操作的仓库: {self.target_repo_name or 'None'}")
-        with open("./repo.csv", 'a', encoding='utf-8') as file:
-            file.write(
-                f'{self.username},https://github.com/{self.username}/{self.target_repo_name}\n')
+        # with open("./repo.csv", 'a', encoding='utf-8') as file:
+        #     file.write(
+        #         f'{self.username},https://github.com/{self.username}/{self.target_repo_name}\n')
         # 需要将 ci.yml文件 和 ci-puls.yml上传 和 github.py本身文件上传
-        need_to_upload_files = [
-            {
-                "path": ".github/workflows/ci-plus.yml",
-                "content_path": ".github/workflows/ci-plus.yml",
-                "message": "Update CI workflow",
-            },
-            # {
-            #     "path": ".github/workflows/ci.yml",
-            #     "content_path": ".github/workflows/ci.yml",
-            #     "message": "Update CI workflow",
-            # },
-            {
-                "path": "github.py",
-                "content_path": "github.py",
-                "message": "update github.py",
-            },
-            # {
-            #     "path": "script.py",
-            #     "content_path": "script.py",
-            #     "message": "update script.py",
-            # },
-            {
-                "path": "requirements.txt",
-                "content_path": "requirements.txt",
-                "message": "update requirement.txt",
-            },
-        ]
+        # need_to_upload_files = [
+        #     {
+        #         "path": ".github/workflows/ci-plus.yml",
+        #         "content_path": ".github/workflows/ci-plus.yml",
+        #         "message": "Update CI workflow",
+        #     },
+        #     # {
+        #     #     "path": ".github/workflows/ci.yml",
+        #     #     "content_path": ".github/workflows/ci.yml",
+        #     #     "message": "Update CI workflow",
+        #     # },
+        #     {
+        #         "path": "github.py",
+        #         "content_path": "github.py",
+        #         "message": "update github.py",
+        #     },
+        #     # {
+        #     #     "path": "script.py",
+        #     #     "content_path": "script.py",
+        #     #     "message": "update script.py",
+        #     # },
+        #     {
+        #         "path": "requirements.txt",
+        #         "content_path": "requirements.txt",
+        #         "message": "update requirement.txt",
+        #     },
+        # ]
 
-        for file_info in need_to_upload_files:
-            file_path = file_info["path"]
-            content_path = file_info["content_path"]
-            commit_message = file_info["message"]
-            self.upload_file_to_repo(file_path, content_path, commit_message)
-            time.sleep(3)
+        # for file_info in need_to_upload_files:
+        #     file_path = file_info["path"]
+        #     content_path = file_info["content_path"]
+        #     commit_message = file_info["message"]
+        #     self.upload_file_to_repo(file_path, content_path, commit_message)
+        #     time.sleep(3)
 
     def _get_username(self):
         """获取当前用户的用户名"""
@@ -404,8 +404,6 @@ class Github(object):
                     file_ = _
                     return file_
 
-
-
     def upload_file_to_repo_forsha(self, fiel, commit_message):
         url = f"https://api.github.com/repos/{self.username}/{self.target_repo_name}/contents/{fiel.get('path')}"
         for _ in range(3):
@@ -430,9 +428,48 @@ class Github(object):
 def upload_random_file_to_repo(token, commit_message):
     g = Github(token=token, proxy=None)
     keyword = str(random.choice(open('keywords.txt', encoding='utf-8').read().splitlines()))
-    # print(keywords)
     file_ = g.get_random_file_(keyword)
     g.upload_file_to_repo_forsha(file_, commit_message)
+
+
+import random
+
+# 定义一个包含多个模板消息的列表
+commit_message_templates = [
+    "修复了 {issue} 问题",
+    "添加了 {feature} 功能",
+    "优化了 {module} 模块的性能",
+    "更新了 {file} 文件",
+    "改进了 {function} 函数的实现",
+    "增加了 {test} 单元测试",
+    "调整了 {config} 配置文件",
+    "解决了 {bug} Bug",
+    "合并了 {branch} 分支",
+    "重构了 {code} 代码"
+]
+
+
+# 生成随机的 commit message
+def generate_random_commit_message():
+    template = random.choice(commit_message_templates)
+    # 假设我们有一些变量可以填充到模板中
+    placeholders = {
+        "issue": "登录失败",
+        "feature": "用户认证",
+        "module": "网络请求",
+        "file": "config.py",
+        "function": "validate_user",
+        "test": "test_login",
+        "config": "settings.json",
+        "bug": "空指针异常",
+        "branch": "feature-branch",
+        "code": "main.py"
+    }
+    commit_message = template.format(**placeholders)
+    return commit_message
+
+
+# 示例调用
 
 
 if __name__ == "__main__":
@@ -440,6 +477,7 @@ if __name__ == "__main__":
         print("Usage: python github.py <token>")
         sys.exit(1)
     my_test_token = sys.argv[1]
+    commit_message = [generate_random_commit_message()]
     upload_random_file_to_repo(
-        my_test_token, commit_message="i want to commit this file"
+        my_test_token, commit_message=commit_message[0]
     )
