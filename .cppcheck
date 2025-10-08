@@ -1,0 +1,125 @@
+/// @file
+/// @brief Contains the list of false positives from cppcheck.
+/// @copyright Copyright (c) 2024 Gammasoft. All rights reserved.
+/// @remarks The list is organized by library and then by error type.
+/// @remarks The XTD_ENABLE_RUN_CPPCHECK option must be enabled to run cppcheck.
+/// @remarks The label @CMAKE_SOURCE_DIR@ represents the source directory. It will be replaced by the real path of the xtd sources located by cmake.
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                    xtd.3rdparty.call_stack
+
+// Do not change the following error in third paty libraries
+//cstyleCast:@CMAKE_SOURCE_DIR@/src/xtd.3rdparty.StackWalker/StackWalker.cpp //:459, :460, :461, :526, :527, :528, :529, :536, :537, :538, :539, :729, :529, :863
+//sizeofDivisionMemfunc:@CMAKE_SOURCE_DIR@/src/xtd.3rdparty.StackWalker/StackWalker.cpp //:536
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.3rdparty.StackWalker/StackWalker.cpp //:133
+knownConditionTrueFalse:@CMAKE_SOURCE_DIR@/src/xtd.3rdparty.StackWalker/StackWalker.cpp //:831
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                                   xtd.dore
+
+// The following parameters can't be const by design.
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/box_integer.h
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/convert_pointer.h
+
+// The following constructors can't be explicit by design.
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/internal/__enum_introspection.h //:72
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/diagnostics/trace_listener_collection.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/box_integer.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/box.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/delegate.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/ustring.h
+
+// Using "c_str()" is not the best method, but it is the only possibility if "char_t" is of another type than "char".
+stlcstrStream:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/internal/__format_stringer.h //:310
+
+// Incomprehensible error from cppcheck, there is no "value" member.
+uninitMemberVar:@CMAKE_SOURCE_DIR@/src/xtd.core/src/xtd/diagnostics/switch_base.cpp //:30, :33
+
+// The following members are marked with the [[maybe_unused]] attribute but cppcheck still sees them as errors.
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.core/src/xtd/internal/__opaque_console_gcc.cpp //:382, :383, :384, :385, :386
+
+// Known errors with assignment pointer parameter.
+uselessAssignmentPtrArg:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/internal/__enum_introspection.h //:51
+
+// Known errors with following virtual methods.
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/diagnostics/default_trace_listener.h //:126, :52
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/diagnostics/ostream_trace_listener.h //:52
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/diagnostics/trace_listener.h //:120
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/io/binary_writer.h //:73, :85, :59
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.core/include/xtd/io/string_writer.h //:59
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                            xtd.core.native
+
+// The following members are marked with the [[maybe_unused]] attribute but cppcheck still sees them as errors.
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.core.native.unix/src/xtd/native/unix/console.cpp //:376, :377, :378, :379, :380
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                                xtd.drawing
+
+// The following constructors can't be explicit by design.
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.drawing/src/xtd/drawing/image.cpp //:190
+
+// The following members are duplicate by design.
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.drawing/include/xtd/drawing/drawing2d/hatch_brush.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.drawing/include/xtd/drawing/drawing2d/linear_gradient_brush.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.drawing/include/xtd/drawing/bitmap.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.drawing/include/xtd/drawing/solid_brush.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.drawing/include/xtd/drawing/texture_brush.h
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                                  xtd.forms
+
+// The following constructors can't be explicit by design.
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/check_box.cpp //:264, :271
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/control.cpp //:1516, :2015
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/form.cpp //:776
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/light_button.cpp //:295, :302
+constParameter:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/toggle_button.cpp //:207, :214
+
+// The following members are duplicate by design.
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/font_picker.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/input_dialog.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/menu_item.h //:347
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/theme_colors.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/theme_images.h
+duplInheritedMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/theme_renderers.h
+
+// The following constructors can't be explicit by design.
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/layout/arranged_element_collection.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/checked_list_box.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/context_menu.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/domain_up_down.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/list_box.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/list_control.h
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/padding.h
+
+// Known errors with following virtual methods.
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/context_menu.h //:44
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/control.h //:849
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/menu.h //:208
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms/include/xtd/forms/timer.h //:57
+
+// It is used, but cpp_check considers that it is not.
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/label.cpp //:34
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                           xtd.forms.native
+
+// The following members are marked with the [[maybe_unused]] attribute but cppcheck still sees them as errors.
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.forms.native.wxwidgets/src/xtd/forms/native/wxwidgets/dark_mode.cpp //:129
+
+// Known errors with following virtual methods.
+virtualCallInConstructor:@CMAKE_SOURCE_DIR@/src/xtd.forms.native.wxwidgets/include/xtd/forms/native/wxwidgets/wx_form.h //:354
+
+// __________________________________________________________________________________________________________________________
+//                                                                                                                  xtd.tunit
+
+// cppcheck makes a confusion with the macro "assert", which has been undefined before.
+internalAstError:@CMAKE_SOURCE_DIR@/src/xtd.tunit/include/xtd/tunit/assert.h
+
+// __________________________________________________________________________________________________________________________
+//                                                                                       To be remove when developement ended
+
+// To be remove when developement ended.
+unusedStructMember:@CMAKE_SOURCE_DIR@/src/xtd.forms/src/xtd/forms/status_bar.cpp //:48, :49
